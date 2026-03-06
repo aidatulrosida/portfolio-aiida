@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | Aidatul Rosida Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --dark-blue: #1e3a8a;
+            --bg-light: #f8fafc;
+            --text-main: #334155;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR */
+        nav {
+            background: rgba(30, 58, 138, 0.98);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav h3 { font-size: 1.2rem; letter-spacing: 1px; }
+
+        .nav-links { list-style: none; display: flex; gap: 20px; }
+        .nav-links li a { color: white; text-decoration: none; font-size: 14px; font-weight: 500; transition: 0.3s; }
+        .nav-links li a:hover { color: #93c5fd; }
+
+        .menu-toggle { display: none; font-size: 24px; cursor: pointer; }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white;
+            text-align: center;
+            padding: 140px 20px 100px;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+        }
+
+        .hero img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid rgba(255,255,255,0.2);
+            margin-bottom: 20px;
+            object-fit: cover;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .hero h1 { font-size: clamp(2rem, 8vw, 2.8rem); font-weight: 800; margin-bottom: 10px; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 30px; }
+
+        /* CONTAINER */
+        .container { width: 90%; max-width: 1100px; margin: auto; padding: 20px 0; }
+
+        .section { padding: 50px 0; }
+        .section h2 { color: var(--dark-blue); margin-bottom: 35px; font-size: 1.8rem; text-align: center; }
+        .section h2::after {
+            content: ''; display: block; width: 45px; height: 4px; background: var(--primary); margin: 8px auto; border-radius: 2px;
+        }
+
+        /* CARDS & SKILLS */
+        .card { background: var(--white); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 25px; border-bottom: 4px solid #e2e8f0; transition: 0.3s; }
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+
+        .tag-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+        .tag {
+            background: #f1f5f9; color: var(--primary); padding: 7px 15px; border-radius: 50px; font-size: 12px; font-weight: 600; transition: 0.3s;
+        }
+
+        /* BUTTONS */
+        .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+        .btn { padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .btn-primary { background: var(--white); color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .btn-outline { border: 2px solid var(--white); color: var(--white); }
+
+        /* EXPERIENCE & EDUCATION */
+        .exp-item { margin-bottom: 25px; padding-left: 20px; border-left: 3px solid #e2e8f0; position: relative; }
+        .exp-item::before {
+            content: ''; position: absolute; left: -9px; top: 0; width: 15px; height: 15px; background: var(--primary); border-radius: 50%;
+        }
+        .exp-item h4 { color: var(--dark-blue); font-size: 1.1rem; }
+        .exp-item ul { margin-top: 10px; margin-left: 15px; font-size: 0.95rem; color: #475569; }
+
+        /* SOCIAL */
+        .social { background: var(--dark-blue); color: white; padding: 60px 20px; text-align: center; border-radius: 25px; margin: 40px 0; }
+        .social-icons { display: flex; justify-content: center; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
+        .social-icons a { width: 50px; height: 50px; background: rgba(255,255,255,0.1); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; transition: 0.3s; text-decoration: none; }
+        .social-icons a:hover { background: var(--white); color: var(--primary); transform: scale(1.1); }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-links {
+                display: none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--dark-blue); flex-direction: column; padding: 20px; text-align: center;
+            }
+            .nav-links.active { display: flex; }
+            .cta-buttons { flex-direction: column; width: 100%; max-width: 280px; margin: auto; }
+        }
+
+        footer { text-align: center; padding: 40px; font-size: 13px; color: #94a3b8; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h3>Welcome</h3>
+        <div class="menu-toggle" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about" onclick="toggleMobileMenu()">About</a></li>
+            <li><a href="#skills" onclick="toggleMobileMenu()">Skills</a></li>
+            <li><a href="#experience" onclick="toggleMobileMenu()">Experience</a></li>
+            <li><a href="#education" onclick="toggleMobileMenu()">Education</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <img src="fotoprofil.jpeg" alt="Aidatul Rosida">
+        <h1>Hi, I'm Aidatul Rosida</h1>
+        <p>Business Information Systems Student | Aspiring System Analyst</p>
+        
+        <div class="cta-buttons">
+            <a href="CV_Aidatul_Rosida.pdf" class="btn btn-primary">
+                <i class="fas fa-file-pdf"></i> View CV
+            </a>
+            <a href="#portfolio" class="btn btn-outline">
+                <i class="fas fa-award"></i> Certificates
+            </a>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="section" id="about">
+            <h2>About Me</h2>
+            <div class="card">
+                <p style="font-size: 1.1rem; color: #475569; text-align: center;">
+                    Passionate Business Information Systems student at <b>Politeknik Negeri Malang</b>. 
+                    I bridge the gap between business needs and technical solutions by focusing on 
+                    <b>System Analysis</b>, <b>UI/UX Design</b>, and <b>ERP implementation</b>.
+                </p>
+            </div>
+        </section>
+
+        <section class="section" id="skills">
+            <h2>Expertise & Skills</h2>
+            <div class="skills-grid">
+                <div class="card">
+                    <h4 style="color: var(--dark-blue)"><i class="fas fa-laptop-code" style="margin-right: 10px;"></i> Technical Expertise</h4>
+                    <div class="tag-container">
+                        <span class="tag">System Analysis & Design</span>
+                        <span class="tag">Laravel & Flutter Development</span>
+                        <span class="tag">Database (MySQL & PostgreSQL)</span>
+                        <span class="tag">UI/UX (Figma & Prototyping)</span>
+                        <span class="tag">ERP Odoo Implementation</span>
+                        <span class="tag">Data Analysis (Power BI & Python)</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4 style="color: var(--dark-blue)"><i class="fas fa-brain" style="margin-right: 10px;"></i> Core Competencies</h4>
+                    <div class="tag-container">
+                        <span class="tag">Business Process Mapping</span>
+                        <span class="tag">Problem Solving</span>
+                        <span class="tag">Analytical Thinking</span>
+                        <span class="tag">Critical Communication</span>
+                        <span class="tag">Project Management</span>
+                        <span class="tag">Team Collaboration</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="experience">
+            <h2>Experience</h2>
+            <div class="card">
+                <div class="exp-item">
+                    <h4>Sales Associate Intern – Gramedia</h4>
+                    <p style="font-weight: 600; font-size: 0.85rem; color: var(--primary);">Retail Operations & Data Accuracy</p>
+                    <ul>
+                        <li>Analyzing customer needs to provide optimal product solutions.</li>
+                        <li>Maintaining inventory data integrity and store stock auditing.</li>
+                        <li>Collaborating in a high-paced team to achieve daily sales targets.</li>
+                    </ul>
+                </div>
+                <div class="exp-item" style="margin-bottom: 0;">
+                    <h4>Sales Associate Intern – Matahari</h4>
+                    <p style="font-weight: 600; font-size: 0.85rem; color: var(--primary);">Process Management & Customer Service</p>
+                    <ul>
+                        <li>Handling daily retail operations and stock management processes.</li>
+                        <li>Ensuring service quality standards through effective communication.</li>
+                        <li>Adapting to fast-changing promotional strategies and store layouts.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="education">
+            <h2>Education</h2>
+            <div class="card">
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: var(--dark-blue)">Politeknik Negeri Malang (2022 - Present)</h4>
+                    <p>D4 Business Information Systems | Current GPA: (Isi GPA-mu)</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--dark-blue)">SMKN 1 Turen</h4>
+                    <p>Marketing Management | Focus on Business Strategy</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="social">
+            <h2>Let's Get In Touch</h2>
+            <p>Ready to discuss how I can help your team with better system solutions.</p>
+            <div class="social-icons">
+                <a href="https://github.com/aidatulrosida" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="mailto:rosidaaidatul@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://wa.me/6285850671408" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/_aiidaap" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Aidatul Rosida Portfolio | Malang, Indonesia</p>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const links = document.getElementById('navLinks');
+            links.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
